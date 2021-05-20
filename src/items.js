@@ -115,6 +115,9 @@ export default function Items (props) {
     }
     get_data()
     document.addEventListener('wheel', get_more)
+    return () => {
+      document.removeEventListener('wheel', get_more)
+    }
   }, [])
 
   return (
