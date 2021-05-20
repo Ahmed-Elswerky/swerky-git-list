@@ -71,3 +71,5 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Libraries Used
 -javascript-time-ago: [https://www.npmjs.com/package/javascript-time-ago]
+-human-number: [https://www.npmjs.com/package/human-number]
+
