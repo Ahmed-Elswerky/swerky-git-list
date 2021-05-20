@@ -13,12 +13,7 @@ var itemsTemp = []
 async function GitData (pageNum) {
   return await fetch(
     'https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc' +
-      pageNum,
-    {
-      headers: {
-        authorization: 'token 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'
-      }
-    }
+      pageNum
   )
     .then(res => res.json())
     .then(
@@ -60,19 +55,11 @@ async function GitData (pageNum) {
           }
           return unique
         }, [])
-
-        //   if (itemsCount > itemsCountTemp) {
-        //     scroll = true
-
-        //     itemsCountTemp = itemsTemp.length
-        //   }
         return itemsTemp
-        //   itemsCount = itemsTemp.length
       },
       e => {
         console.log(e)
         return false
-        //   document.getElementById('loading').innerHTML = '*No More Repos*'
       }
     )
 }

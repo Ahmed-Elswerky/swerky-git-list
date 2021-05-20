@@ -1,29 +1,18 @@
 import { useState, useEffect } from 'react'
-// import TimeAgo from 'javascript-time-ago'
-// import en from 'javascript-time-ago/locale/en'
-// import humanNumber from 'human-number'
 import GitData from './GitData'
-// TimeAgo.addDefaultLocale(en)
-// //--- A function to get the data from the git list items e, and return not found if there's no value
-// function data (e, k) {
-//   if (k.length > 0) if (e[k] !== null) if (e[k] !== undefined) return e[k]
-//   return '*' + k.charAt(0).toUpperCase() + k.slice(1) + ' Was Not Found*'
-// }
+
 //--- Global variables
 var itemsCount = 0,
   itemsCountTemp = 0,
   itemsTemp = []
 var page = 1
 var scroll = true
-// const timeAgo = new TimeAgo('en-US')
 export default function Items (props) {
   var [items, setItems] = useState([])
   const get_data = () => {
     var pageNum = ''
     //--- If the numer of pages needed is greater than 1, and also the git list items count is more than 0
     if (page > 1 && itemsCount > 0) pageNum = '&page=' + page
-
-    // itemsTemp = await GitData(pageNum)
     GitData(pageNum).then(t => {
       if (t) {
         if (t.length > itemsCountTemp) {
