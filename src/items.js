@@ -2,15 +2,12 @@ import { useState, useEffect } from 'react'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en'
 import humanNumber from 'human-number'
-
 TimeAgo.addDefaultLocale(en)
-
 //--- A function to get the data from the git list items object, and return not found if there's no value
 function data (e, k) {
   if (k.length > 0) if (e[k] !== null) if (e[k] !== undefined) return e[k]
   return '*' + k.charAt(0).toUpperCase() + k.slice(1) + ' Was Not Found*'
 }
-
 //--- Global variables
 var itemsCount = 0,
   itemsCountTemp = 0,
@@ -18,13 +15,10 @@ var itemsCount = 0,
 var page = 1
 var scroll = true
 const timeAgo = new TimeAgo('en-US')
-
 export default function Items (props) {
   var [items, setItems] = useState([])
-
   const get_data = () => {
     var pageNum = ''
-
     //--- If the numer of pages needed is greater than 1, and also the git list items count is more than 0
     if (page > 1 && itemsCount > 0) pageNum = '&page=' + page
 
@@ -35,14 +29,13 @@ export default function Items (props) {
       .then(res => res.json())
       .then(
         r => {
-          console.log(
-            'get data of page:',
-            page,
-            ', number of elements:',
-            r.items.length + itemsCount
-          )
-
-          if (r.items !== undefined)
+          if (r.items !== undefined) {
+            console.log(
+              'get data of page:',
+              page,
+              ', number of elements:',
+              r.items.length + itemsCount
+            )
             r.items.forEach(e => {
               itemsTemp.push(
                 <div className='repo' key={e.id}>
@@ -71,6 +64,7 @@ export default function Items (props) {
                 </div>
               )
             })
+          }
           //--- Removing Duplicates
           itemsTemp.reduce((unique, o) => {
             if (!unique.some(obj => String(obj.key) === String(o.key))) {
@@ -94,7 +88,6 @@ export default function Items (props) {
         }
       )
   }
-
   //--- Initialize the data and scroll event once, when component loads
   useEffect(() => {
     //--- If the scroll is at the last 15% of the page, get more results (increase page value by 1)
@@ -119,7 +112,6 @@ export default function Items (props) {
       document.removeEventListener('wheel', get_more)
     }
   }, [])
-
   return (
     <div className='App'>
       {items}
